@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="DeepGuardReseller.Default" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+
+
+
         <div class="right_col" role="main">
           <!-- top tiles -->
           <div class="row tile_count">

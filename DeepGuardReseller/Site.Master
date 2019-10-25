@@ -1,5 +1,9 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="DeepGuardReseller.Site" %>
 
+<%  System.Web.HttpCookie kullaniciCookie = Request.Cookies["id"];
+    string uid = kullaniciCookie.Value;
+    DataModel.User user = new DataModel.User(Convert.ToInt32(Function.SifreyiCoz(uid)));
+        %>
 <!DOCTYPE html>
 
 <html>
@@ -53,7 +57,7 @@
               </div>
               <div class="profile_info" style="text-align:center">
                 
-                <h2>Hoşgeldin X Bayi</h2>
+               
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -63,7 +67,7 @@
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>General</h3>
+                
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-clone"></i> Dökuman <span class="fa fa-chevron-down"></span></a> 
                        <ul class="nav child_menu">
@@ -106,7 +110,7 @@
               <ul class=" navbar-right">
                 <li class="nav-item dropdown open" style="padding-left: 15px;">
                   <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                    <img src="images/img.jpg" alt=""><%=user.firstNameLastName %>
                   </a>
                   <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item"  href="javascript:;"> Profile</a>

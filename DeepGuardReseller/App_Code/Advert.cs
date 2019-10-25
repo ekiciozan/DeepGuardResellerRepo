@@ -16,46 +16,54 @@ namespace DataModel
     {
         public int id;
         public string userName;
-        public string email;
         public string password;
-        public string phone;
-        public Image profileImage;
-        public string name;
-        public string surname;
+        public string firstNameLastName;
+        public string email;
+        public string personalPhone;
+        public string companyPhone;
+        public string companyName;
+        public string website;
+        public string address;
+        public string taxOffice;
+        public string taxNumber;
         public DateTime signUpDate;
         public User(int id)
         {
             DataTable dataTable = Sql.Table("select * from users where id=?1", id.ToString());
             this.id = (int)dataTable.Rows[0]["id"];
             this.userName = (string)dataTable.Rows[0]["UserName"];
+            this.password = (string)dataTable.Rows[0]["UserPassword"];
+            this.firstNameLastName = (string)dataTable.Rows[0]["FirstNameLastName"];
             this.email = (string)dataTable.Rows[0]["Email"];
-            this.password = (string)dataTable.Rows[0]["Password"];
-            this.phone = (string)dataTable.Rows[0]["Phone"];
-            profileImage = new Image((int)dataTable.Rows[0]["ProfileImageId"], Image.ImageNullType.ProfileImage);
-            this.name = (string)dataTable.Rows[0]["Name"];
-            this.surname = (string)dataTable.Rows[0]["Surname"];
+            this.personalPhone = (string)dataTable.Rows[0]["PersonalPhone"];
+            this.companyPhone = (string)dataTable.Rows[0]["CompanyPhone"];
+            this.companyName = (string)dataTable.Rows[0]["CompanyName"];
+            this.website = (string)dataTable.Rows[0]["WebSite"];
+            this.address = (string)dataTable.Rows[0]["Address"];
+            this.taxOffice = (string)dataTable.Rows[0]["TaxOffice"];
+            this.taxNumber = (string)dataTable.Rows[0]["TaxNumber"];
             this.signUpDate = (DateTime)dataTable.Rows[0]["SignUpDate"];
 
         }
-        public static User GetUserWithMailOrUserName(string mailOrUsername)
-        {
-            DataTable dataTable = Sql.Table("select * from users where UserName=?1 or Email=?1", mailOrUsername);
-            if (dataTable.Rows.Count == 0) return null;
-            User user = new User()
-            {
-                id = (int)dataTable.Rows[0]["id"],
-                userName = (string)dataTable.Rows[0]["UserName"],
-                email = (string)dataTable.Rows[0]["Email"],
-                password = (string)dataTable.Rows[0]["Password"],
-                phone = (string)dataTable.Rows[0]["Phone"],
-                profileImage = new Image((int)dataTable.Rows[0]["ProfileImageId"], Image.ImageNullType.ProfileImage),
-                name = (string)dataTable.Rows[0]["Name"],
-                surname = (string)dataTable.Rows[0]["Surname"],
-                signUpDate = (DateTime)dataTable.Rows[0]["SignUpDate"],
-            };
-            return user;
+        //public static User GetUserWithMailOrUserName(string mailOrUsername)
+        //{
+        //    DataTable dataTable = Sql.Table("select * from users where UserName=?1 or Email=?1", mailOrUsername);
+        //    if (dataTable.Rows.Count == 0) return null;
+        //    User user = new User()
+        //    {
+        //        id = (int)dataTable.Rows[0]["id"],
+        //        userName = (string)dataTable.Rows[0]["UserName"],
+        //        email = (string)dataTable.Rows[0]["Email"],
+        //        password = (string)dataTable.Rows[0]["Password"],
+        //        phone = (string)dataTable.Rows[0]["Phone"],
+        //        profileImage = new Image((int)dataTable.Rows[0]["ProfileImageId"], Image.ImageNullType.ProfileImage),
+        //        name = (string)dataTable.Rows[0]["Name"],
+        //        surname = (string)dataTable.Rows[0]["Surname"],
+        //        signUpDate = (DateTime)dataTable.Rows[0]["SignUpDate"],
+        //    };
+        //    return user;
 
-        }
+        //}
         public User() { }
         public void SendPasswordMissingMail()
         {

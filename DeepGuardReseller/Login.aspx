@@ -47,7 +47,7 @@
     }
     if (Request.QueryString["i"] == "register")
     {
-        if (Function.IsLogin(Request.Form["Reg_username"].Trim(), Request.Form["Reg_password"].Trim()) == false)
+        if (Function.IsLogin(Request.Form["Reg_username"].Trim(), Request.Form["Reg_password"].Trim()) == false && Function.IsLogin(Request.Form["email"].Trim(), Request.Form["Reg_password"].Trim()) == false ) 
         {
             try
             {
@@ -135,7 +135,7 @@
 
         <div id="register" class="animate form registration_form">
           <section class="login_content">
-            <form action="?i=register" method="post">
+            <form action="?i=register#signup" method="post">
               <h1>Kayıt Formu</h1>
                <div>
                 <input type="text" class="form-control" name="Reg_username" placeholder="Kullanıcı Adı" required="required" />
@@ -177,6 +177,7 @@
               </div>
               <div>
                 <button type="submit" class="btn btn-success" style="width:100px;height:40px;">Kayıt Ol</button>
+                  <span style="color:red"><%=errorMessage %></span>
                 <%--<a class="btn btn-default submit" href="index.html">Kayıt Ol</a>--%>
               </div>
 
