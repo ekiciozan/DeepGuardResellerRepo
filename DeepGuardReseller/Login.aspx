@@ -1,5 +1,73 @@
 ﻿<%@ Page Language="C#"%>
 
+<%
+    {
+        HttpCookie aCookie;
+        string cookieName;
+        int limit = Request.Cookies.Count;
+        for (int i = 0; i < limit; i++)
+        {
+            cookieName = Request.Cookies[i].Name;
+            aCookie = new HttpCookie(cookieName);
+            aCookie.Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies.Add(aCookie);
+        }
+    }
+    string errorMessage = "";
+    if (Request.QueryString["i"] == "login")
+    {
+        if (Function.IsLogin(Request.Form["Log_username"].Trim(), Request.Form["Log_password"].Trim()))
+        {
+            {
+                HttpCookie aCookie;
+                string cookieName;
+                int limit = Request.Cookies.Count;
+                for (int i = 0; i < limit; i++)
+                {
+                    cookieName = Request.Cookies[i].Name;
+                    aCookie = new HttpCookie(cookieName);
+                    aCookie.Expires = DateTime.Now.AddDays(-1);
+                    Response.Cookies.Add(aCookie);
+                }
+            }
+            {
+                HttpCookie kullaniciCookie;
+                kullaniciCookie = Request.Cookies["id"];
+                kullaniciCookie = new HttpCookie("id", Function.Sifrele(Sql.Table("select id from users where UserName=" + "?1" + " or Email=" + "?1" + "", Request.Form["Log_username"].Trim()).Rows[0][0].ToString()));
+                kullaniciCookie.Expires = DateTime.Now.AddMonths(6);
+                //kullaniciCookie.Expires = DateTime.Now.AddHours(1);
+                Response.Cookies.Add(kullaniciCookie);
+            }
+            Response.Redirect("Default.aspx");
+        }
+        else
+        {
+            errorMessage = "Hatalı Giriş Yaptınız!";
+        }
+    }
+    if (Request.QueryString["i"] == "register")
+    {
+        if (Function.IsLogin(Request.Form["Reg_username"].Trim(), Request.Form["Reg_password"].Trim()) == false)
+        {
+            try
+            {
+                           Sql.ExSql($"INSERT INTO users (UserName , UserPassword, FirstNameLastName, Email, PersonalPhone, CompanyPhone, CompanyName, WebSite, Address, TaxOffice, TaxNumber) Values (?1,?2,?3,?4,?5,?6,?7,?8,?9,10,?11)", Request.Form["Reg_username"],Request.Form["Reg_password"],Request.Form["nameSurname"],Request.Form["email"],Request.Form["personalPhone"],Request.Form["companyPhone"],Request.Form["companyName"],Request.Form["website"],Request.Form["address"],Request.Form["taxOffice"],Request.Form["TaxNumber"] );
+                           Response.Redirect("Default.aspx");
+            }
+            catch (Exception)
+            {
+                errorMessage = "Bir Hata oluştu!.";
+            }
+        }
+        else
+        {
+            errorMessage = "Zaten Bizim Bayimizsiniz..";
+        }
+    }
+
+
+%>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -32,16 +100,16 @@
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form>
+            <form action="?i=login" method="post">
               <h1>Giriş Formu</h1>
               <div>
-                <input type="text" class="form-control" id="Log_kullanici_adi" placeholder="Kullanıcı Adı" required="" />
+                <input type="text" class="form-control" name="Log_username" placeholder="Kullanıcı Adı" required="" />
               </div>
               <div>
-                <input type="password" class="form-control" id="Log_sifre" placeholder="Şifre" required="" />
+                <input type="password" class="form-control" name="Log_password" placeholder="Şifre" required="" />
               </div>
               <div>
-                <button type="button" class="btn btn-success" style="width:100px;height:40px;">Giriş</button>
+                <button type="submit" class="btn btn-success" style="width:100px;height:40px;">Giriş</button>
                <%-- <a class="reset_pass" href="#">Lost your password?</a>--%>
               </div>
 
@@ -67,48 +135,48 @@
 
         <div id="register" class="animate form registration_form">
           <section class="login_content">
-            <form>
+            <form action="?i=register" method="post">
               <h1>Kayıt Formu</h1>
                <div>
-                <input type="text" class="form-control" id="Kayit_kullanici_adi" placeholder="Kullanıcı Adı" required="required" />
+                <input type="text" class="form-control" name="Reg_username" placeholder="Kullanıcı Adı" required="required" />
               </div>
               <div>
-                <input type="password" class="form-control" id="Kayit_sifre" placeholder="Şifre" required="required" />
+                <input type="password" class="form-control" name="Reg_password" placeholder="Şifre" required="required" />
               </div>
                <div>
-                <input type="text" class="form-control" id="ad_soyad" placeholder="Ad Soyad" required="required" />
+                <input type="text" class="form-control" name="nameSurname" placeholder="Ad Soyad" required="required" />
               </div>
               <div>
-                <input type="text" class="form-control" id="email" placeholder="E-Mail" required="required" />
+                <input type="email" class="form-control" name="email" placeholder="E-Mail" required="required" />
               </div>
               <div>
-                <input type="text" class="form-control" id="kisisel_tel" placeholder="Kişisel Telefon" required="required" />
+                <input type="text" class="form-control" name="personalPhone" placeholder="Kişisel Telefon" required="required" />
               </div>
               <div>
-                <input type="text" class="form-control" id="firma_tel" placeholder="Firma Telefonu" required="required" />
+                <input type="text" class="form-control" name="companyPhone" placeholder="Firma Telefonu" required="required" />
               </div>
               <div>
-                <input type="text" class="form-control" id="firma_ad" placeholder="Firma Adı" required="required" />
+                <input type="text" class="form-control" name="companyName" placeholder="Firma Adı" required="required" />
               </div>
                 <div>
-                <input type="text" class="form-control" id="web_site" placeholder="Web Sitesi" required="required" />
+                <input type="text" class="form-control" name="webSite" placeholder="Web Sitesi" required="required" />
               </div>
                 <div>
-                    <textarea class="form-control" rows="3" cols="40" id="adres" placeholder="Adres">Adres..
+                    <textarea class="form-control" rows="3" cols="40" name="address" placeholder="Adres">Adres..
                     </textarea>
               </div>
               <div style="margin-top:5%">
-                <input type="text" class="form-control" id="vergi_dairesi" placeholder="Vergi Dairesi" required="required" />
+                <input type="text" class="form-control" name="taxOffice" placeholder="Vergi Dairesi" required="required" />
               </div>
                 <div>
-                <input type="text" class="form-control" id="vergi_numarasi" placeholder="Vergi Numarası" required="required" />
+                <input type="text" class="form-control" name="taxNumber" placeholder="Vergi Numarası" required="required" />
               </div>
               <div>
                 <%--<a class="btn btn-default submit" href="index.html">Giriş</a>--%>
               <%--   <a class="reset_pass" href="#">Lost your password?</a>--%>
               </div>
               <div>
-                <button type="button" class="btn btn-success" style="width:100px;height:40px;">Kayıt Ol</button>
+                <button type="submit" class="btn btn-success" style="width:100px;height:40px;">Kayıt Ol</button>
                 <%--<a class="btn btn-default submit" href="index.html">Kayıt Ol</a>--%>
               </div>
 

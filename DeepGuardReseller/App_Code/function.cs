@@ -69,8 +69,8 @@ public class Function
     //178.18.206.142 yüklerken localhost olarak değiştir.
     public static string hash = "Bu Şifreyi Çözersen Senin A** G**";
 
-    public static string datebase = "db1_termalvadi";
-    static public string conString = @"Server=178.18.206.142; Database=" + datebase + "; Uid=db1_Termalvadi19; Pwd=Termalvadi19.; convert zero datetime=True; Allow User Variables=True;";
+    public static string datebase = "db1_deepguardreseller";
+    static public string conString = @"Server=178.18.206.142; Database=" + datebase + "; Uid=db1_DGReseller; Pwd=DGReseller2019.; convert zero datetime=True; Allow User Variables=True;";
 
 
     ////Eski
@@ -140,7 +140,7 @@ public class Function
     {
         using (MySqlConnection con = new MySqlConnection(conString))
         {
-            using (MySqlCommand cmd = new MySqlCommand("select * from users where (UserName=?username or Email=?username) and Password=?pass", con))
+            using (MySqlCommand cmd = new MySqlCommand("select * from users where (UserName=?username or Email=?username) and UserPassword=?pass", con))
             {
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.AddWithValue("?username", userNameOrEmail);
