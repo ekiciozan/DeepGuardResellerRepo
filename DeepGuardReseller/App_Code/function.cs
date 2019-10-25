@@ -22,10 +22,12 @@ public class Sql
     {
         return new Function().DataTable(sql);
     }
+
     static public DataTable Table(string sql,params string[] values)
     {
         return new Function().DataTableSafer(sql,values);
     }
+
     static public string Cell(string sql)
     {
         //try
@@ -38,6 +40,7 @@ public class Sql
         //}
       
     }
+
     static public string Cell(string sql,params string[] values)
     {
         //try
@@ -50,10 +53,12 @@ public class Sql
         //}
 
     }
+
     static public void ExSql(string sql)
     {
        new Function().ExecuteSqlCommand(sql);
     }
+
     static public void ExSql(string sql,params string[] values)
     {
         new Function().ExecuteSqlCommandSafer(sql,values);
