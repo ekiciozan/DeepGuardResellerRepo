@@ -136,11 +136,11 @@ public class Function
             }
         }
     }
-    public static bool IsLogin(string userNameOrEmail,string password)
+    public static int IsLogin(string userNameOrEmail,string password)
     {
         using (MySqlConnection con = new MySqlConnection(conString))
         {
-            using (MySqlCommand cmd = new MySqlCommand("select * from users where (UserName=?username or Email=?username) and UserPassword=?pass", con))
+            using (MySqlCommand cmd = new MySqlCommand("select IsConfirm from users where (UserName=?username or Email=?username) and UserPassword=?pass", con))
             {
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.AddWithValue("?username", userNameOrEmail);
@@ -153,11 +153,15 @@ public class Function
                         dt.TableName = "table";
                         if (dt.Rows.Count == 0)
                         {
-                            return false;
+                            return -1;
+                        }
+                        else if(dt.Rows[0][0].ToString()=="0")
+                        {
+                            return 0;
                         }
                         else
                         {
-                            return true;
+                            return 1;
                         }
                     }
                 }
