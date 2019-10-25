@@ -257,6 +257,7 @@
     <Content Include="docs\js\jquery.min.js" />
     <Content Include="docs\js\shBrushXml.js" />
     <Content Include="docs\js\shCore.js" />
+    <Content Include="images\deepguardlogo-icon.png" />
     <Content Include="Login.aspx" />
     <Content Include="production\calendar.html" />
     <Content Include="production\chartjs.html" />
