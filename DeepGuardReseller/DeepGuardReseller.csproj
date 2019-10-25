@@ -5093,6 +5093,7 @@
     <Content Include="vendors\validator\.gitignore" />
     <Content Include="vendors\validator\README.md" />
     <Content Include="vendors\validator\validator.jquery.json" />
+    <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
