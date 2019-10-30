@@ -61,6 +61,7 @@
         {
             errorMessage = "Bu Kullanıcı Adı Sistemde Zaten Kayıtlı.";
         }
+
         else
         {
             try
@@ -130,11 +131,10 @@
                             <p class="change_link">
                                 Bayimiz Olmak İster misiniz?
                   <a href="#signup" class="to_register">Kayıt Ol </a>
-                            </p>
-
+                            </p><br>
+                             <a href="../index.html" class="to_register">Web Sitesine Devam Et</a>
                             <div class="clearfix"></div>
                             <br />
-
                             <div>
                                 <h1>
                                     <img src="images/deepguardlogo-icon.png" width="35" height="40" />
