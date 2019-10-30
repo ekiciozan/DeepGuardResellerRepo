@@ -2,9 +2,18 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
+    <div class="right_col" role="main">
+        <div class="row tile_count">
+            <div class="container-fluid" style="text-align:center">
+                <img src="images/Logo with line.png" width="500" height="450" class="img-fluid">
+                <h1 style="text-align:">Bayi Sistemine Hoş Geldiniz.</h1>
+            </div>
+        </div>
+    </div>
 
 
-        <div class="right_col" role="main">
+
+      <%--  <div class="right_col" role="main">
           <!-- top tiles -->
           <div class="row tile_count">
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
@@ -680,5 +689,5 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>--%>
 </asp:Content>

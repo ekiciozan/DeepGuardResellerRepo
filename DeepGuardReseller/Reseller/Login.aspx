@@ -1,4 +1,6 @@
-﻿<%@ Page Language="C#" %>
+﻿<%@ Page Language="C#"
+    
+    %>
 
 <%
     {
@@ -52,6 +54,7 @@
     }
     if (Request.QueryString["i"] == "register")
     {
+        string taxNum = Request.Form["TaxNumber"];
 
         if (Sql.Cell("select Count(id) from users where Email=?1",Request.Form["email"]) != "0")
         {
@@ -61,7 +64,14 @@
         {
             errorMessage = "Bu Kullanıcı Adı Sistemde Zaten Kayıtlı.";
         }
-
+        else if(Function.IsNumeric(Request.Form["TaxNumber"]) == false)
+        {
+            errorMessage = "Veri Numarası Sayı Olmalıdır.";
+        }
+        else if(Request.Form["Reg_password"].Length < 6)
+        {
+            errorMessage = "Şifre 6 karakterden küçük olamaz.";
+        }
         else
         {
             try
@@ -120,7 +130,7 @@
                             <input type="password" class="form-control" name="Log_password" placeholder="Şifre" required="" />
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-success" style="width: 100px; height: 40px;">Giriş</button>
+                            <button type="submit" class="btn btn-success" style="width: 100px; height: 40px;">Giriş</button><br>
                             <span style="color: red"><%=errorMessage %></span>
                             <%-- <a class="reset_pass" href="#">Lost your password?</a>--%>
                         </div>
@@ -188,7 +198,7 @@
                             <%--   <a class="reset_pass" href="#">Lost your password?</a>--%>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-success" style="width: 100px; height: 40px;">Kayıt Ol</button>
+                            <button type="submit" class="btn btn-success" style="width: 100px; height: 40px;">Kayıt Ol</button><br>
                             <span style="color: red"><%=errorMessage %></span>
                             <%--<a class="btn btn-default submit" href="index.html">Kayıt Ol</a>--%>
                         </div>

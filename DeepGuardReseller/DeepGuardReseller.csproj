@@ -321,6 +321,8 @@
     <Content Include="Reseller\build\js\custom.js" />
     <Content Include="Reseller\build\js\custom.min.js" />
     <Content Include="Reseller\Default.aspx" />
+    <Content Include="Reseller\process.aspx" />
+    <Content Include="Reseller\UserList.aspx" />
     <Content Include="Reseller\Doc1.aspx" />
     <Content Include="Reseller\docs\css\animate.min.css" />
     <Content Include="Reseller\docs\css\bootstrap.min.css" />
@@ -341,6 +343,7 @@
     <Content Include="Reseller\docs\js\shBrushXml.js" />
     <Content Include="Reseller\docs\js\shCore.js" />
     <Content Include="Reseller\images\deepguardlogo-icon.png" />
+    <Content Include="Reseller\images\Logo with line.png" />
     <Content Include="Reseller\Login.aspx" />
     <Content Include="Reseller\production\calendar.html" />
     <Content Include="Reseller\production\chartjs.html" />

@@ -26,6 +26,7 @@ namespace DataModel
         public string address;
         public string taxOffice;
         public string taxNumber;
+        public string auth;
         public DateTime signUpDate;
         public User(int id)
         {
@@ -43,6 +44,8 @@ namespace DataModel
             this.taxOffice = (string)dataTable.Rows[0]["TaxOffice"];
             this.taxNumber = (string)dataTable.Rows[0]["TaxNumber"];
             this.signUpDate = (DateTime)dataTable.Rows[0]["SignUpDate"];
+            this.auth = (string)dataTable.Rows[0]["Authorization"];
+
 
         }
         //public static User GetUserWithMailOrUserName(string mailOrUsername)
