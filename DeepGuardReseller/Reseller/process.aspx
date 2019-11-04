@@ -10,14 +10,15 @@
     {
         //new Function().ExecuteSqlCommand($"Delete from gorevler where id ='" +eventId+"'");
         new Function().DataTable("UPDATE users SET isConfirm = 1 where id='" + Request.QueryString["id"]  + "';"); 
-        Response.Write("<body onload=\"window.location=document.referrer;\"></body>");
+        Response.Write("<button onclick=\"$('#Confirm_"+Request.QueryString["id"]+"').load('process.aspx?p=notconfirm&id="+Request.QueryString["id"]+"');\" class=\"btn btn-danger\"><i class=\"fa fa-remove\"></i></button>");
     }
 %>
-<%if (Request.QueryString["p"] == "notconfirm")
+<% else if (Request.QueryString["p"] == "notconfirm")
     {
         //new Function().ExecuteSqlCommand($"Delete from gorevler where id ='" +eventId+"'");
-        new Function().DataTable("UPDATE users SET isConfirm = 0 where id='" + Request.QueryString["id"]  + "';"); 
-        Response.Write("<body onload=\"window.location=document.referrer;\"></body>");
+        new Function().DataTable("UPDATE users SET isConfirm = 0 where id='" + Request.QueryString["id"]  + "';");
+        Response.Write("<button onclick=\"$('#Confirm_"+Request.QueryString["id"]+"').load('process.aspx?p=confirm&id="+Request.QueryString["id"]+"');\" class=\"btn btn-success\"><i class=\"fa fa-check\"></i></button>");
+
     }
 %>
 
